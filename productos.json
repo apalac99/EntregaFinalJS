@@ -1,0 +1,38 @@
+[
+    {
+        "nombre": "Patito verde",
+        "referencia": "REF001",
+        "precio": 10,
+        "imagen": "1.jpg"
+    },
+    {
+        "nombre": "Patito mora",
+        "referencia": "REF002",
+        "precio": 20,
+        "imagen": "2.jpg"
+    },
+    {
+        "nombre": "Patito azul",
+        "referencia": "REF003",
+        "precio": 30,
+        "imagen": "3.jpg"
+    },
+    {
+        "nombre": "Patito rojo",
+        "referencia": "REF004",
+        "precio": 40,
+        "imagen": "4.jpg"
+    },
+    {
+        "nombre": "Patito limón",
+        "referencia": "REF005",
+        "precio": 50,
+        "imagen": "5.jpg"
+    },
+    {
+        "nombre": "Patito gris",
+        "referencia": "REF006",
+        "precio": 60,
+        "imagen": "6.jpg"
+    }
+]
