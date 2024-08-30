@@ -70,10 +70,9 @@ function actualizarTotalCarrito() {
   document.getElementById('totalCarrito').innerHTML = `Total: $${carrito}`;
   document.getElementById(`pagoCompletado`).innerHTML = ``;
 
-  // Actualizar las unidades de cada producto
+  // actualizar las unidades de cada producto
   for (let i = 0; i < productos.length; i++) {
       let referencia = productos[i].referencia;
-      let cantidadProducto = localStorage.getItem(referencia) ? parseInt(localStorage.getItem(referencia)) : 0;
       document.getElementById(`total${referencia}`).innerHTML = `0`;
   }
 }
@@ -82,7 +81,7 @@ function vaciarCarrito() {
   localStorage.setItem('carrito', '0');
   for (let i = 0; i < productos.length; i++) {
       let referencia = productos[i].referencia;
-      localStorage.setItem(referencia, '0'); // Reiniciar contador de cada producto 
+      localStorage.setItem(referencia, '0'); // Reiniciar contador de cada prducto 
   }
   actualizarTotalCarrito(); // Actualizar el total del carrito y las unidades de cada producto
 }
@@ -91,13 +90,39 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-let numeroConfirmacion = getRandomInt(99999999999);
+let numeroConfirmacion = getRandomInt(99999);
 
 const compraCompleta = document.getElementById("pagar");
 compraCompleta.addEventListener("click", confirmarCompra);
 
 function confirmarCompra() {
-  document.getElementById(`pagoCompletado`).innerHTML = `<br><br><img src="images/pay.png" width="50px" class="imagen"><h3>Pago Confirmado</h3><h4>Número de confirmación<br>${numeroConfirmacion}</h4><br><img src="images/gracias.png" width="50px">`;
+
+     let valorenCarro = localStorage.getItem('carrito') ? parseInt(localStorage.getItem('carrito')) : 0;
+
+     if (valorenCarro > 0) {
+
+        swal({
+              title: "Gracias por su compra ",
+  
+              text: "Pagado $"+valorenCarro+" - Número de confirmación " +numeroConfirmacion,
+
+              icon: "success",
+             });
+
+             vaciarCarrito()
+
+      } else {
+
+        swal({
+
+              text: "No hay nada en el carrito de compras",
+
+              icon: "error",
+            });
+  
+      }  
+
+  
 }
 
 
