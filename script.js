@@ -93,6 +93,7 @@ function getRandomInt(max) {
 let numeroConfirmacion = getRandomInt(99999);
 
 const compraCompleta = document.getElementById("pagar");
+
 compraCompleta.addEventListener("click", confirmarCompra);
 
 function confirmarCompra() {
