@@ -1,0 +1,31 @@
+<meta charset="UTF-8">
+    <title>Validar 7 Números</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <label for="numero">Ingresa un número de 7 dígitos:</label>
+    <input type="text" id="numero" maxlength="7" placeholder="Ej: 1234567">
+    <button onclick="validarNumero()">Validar</button>
+
+    <script>
+        function validarNumero() {
+            const numero = document.getElementById('numero').value;
+
+            // Verifica que el número tenga exactamente 7 dígitos y que sean solo números
+            if (numero.length === 7 && /^\d+$/.test(numero)) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Número válido',
+                    text: 'Has ingresado un número de 7 dígitos.'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Número inválido',
+                    text: 'Por favor, ingresa exactamente 7 dígitos numéricos.'
+                });
+            }
+        }
+    </script>
+</body>
+</html>
