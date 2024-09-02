@@ -103,40 +103,92 @@ let numeroConfirmacion = getRandomInt(99999);
 
 
 const compraCompleta = document.getElementById("pagar");
+  if (compraCompleta) {
+    compraCompleta.addEventListener("click", confirmarCompra);
+  }
+  
+  const compraCompleta2 = document.getElementById("Enviar");
+  if (compraCompleta2) {
+    compraCompleta2.addEventListener("click", validarFormulario);
+  }
 
-compraCompleta.addEventListener("click", confirmarCompra);
+  // Función para validar el formulario
+  function validarFormulario(event) {
+    event.preventDefault();
+  
+    const numero = document.getElementById('numero').value;
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    let errores = false;
+  
+    // Validar número (que sean 7 dígitos)
+    if (!/^\d{7}$/.test(numero)) {
+      swal({
+        text: "El campo de número de la tarjeta debe contener exactamente 7 dígitos.",
+        icon: "error",
+      });
+      errores = true;
+    }
+  
+    // Validar nombre
+    if (nombre.trim() === '') {
+      swal({
+        text: "El campo de nombre no puede estar vacío.",
+        icon: "error",
+      });
+      errores = true;
+    }
+  
+    // Validar email
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      swal({
+        text: "Por favor, ingresa un correo electrónico válido.",
+        icon: "error",
+      });
+      errores = true;
+    }
+  
+    let valorenCarro = localStorage.getItem('carrito') ? parseInt(localStorage.getItem('carrito')) : 0;
+  
+    if (valorenCarro > 0 && !errores) {
+      swal({
+        title: "Gracias por su compra",
+        text: "Pagado $" + valorenCarro + " - Número de confirmación " + numeroConfirmacion,
+        icon: "success",
+      });
+      vaciarCarrito();
+    } else if (valorenCarro === 0) {
+      swal({
+        text: "No hay nada en el carrito de compras",
+        icon: "error",
+      });
+    }
+  
+    return !errores; // Solo permitir el envío si no hay errores
+  }
+  
 
+
+// Función para confirmar compra
 function confirmarCompra() {
+  let valorenCarro = localStorage.getItem('carrito') ? parseInt(localStorage.getItem('carrito')) : 0;
 
-     let valorenCarro = localStorage.getItem('carrito') ? parseInt(localStorage.getItem('carrito')) : 0;
-
-     if (valorenCarro > 0) {
-
-        swal({
-              title: "Gracias por su compra ",
-  
-              text: "Pagado $"+valorenCarro+" - Número de confirmación " +numeroConfirmacion,
-
-              icon: "success",
-             });
-
-             vaciarCarrito()
-
-      } else {
-
-        swal({
-
-              text: "No hay nada en el carrito de compras",
-
-              icon: "error",
-            });
-  
-      }  
-
-  
+  if (valorenCarro > 0) {
+    swal({
+      title: "Gracias por su compra",
+      text: "Pagado $" + valorenCarro + " - Número de confirmación " + numeroConfirmacion,
+      icon: "success",
+    });
+    vaciarCarrito();
+  } else {
+    swal({
+      text: "No hay nada en el carrito de compras",
+      icon: "error",
+    });
+  }
 }
 
 
-
-window.onload = actualizarTotalCarrito();
-
+window.onload = function() {
+  actualizarTotalCarrito();
+};
