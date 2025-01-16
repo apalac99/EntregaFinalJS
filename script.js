@@ -1,5 +1,3 @@
-// Final
-
 class Producto {
   constructor(nombre, referencia, precio, imagen) {
     this.nombre = nombre;
